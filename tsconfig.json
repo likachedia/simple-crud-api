@@ -1,0 +1,24 @@
+{
+    "compilerOptions": {
+      "outDir": "./dist/",
+      "rootDir": "./src",
+      "noImplicitAny": false,
+      // "module": "es6",
+      // "target": "es5",
+      "allowJs": true,
+      "moduleResolution": "node",
+      "sourceMap": true,
+      "esModuleInterop": true,
+      "target": "es6",
+      // "module": "CommonJS",
+      "skipLibCheck": true,
+    },
+    // "ts-node": {
+    //     "esm": true
+    // },
+    // "typeRoots": ["node_modules/@types"],
+    "include": [
+        "src",
+        "package.json"
+     ],
+  }
