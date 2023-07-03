@@ -5,7 +5,6 @@ export const users = [];
 
 export const add = (user: User) => {
     users.push(user);
-    console.log(users);
 }
 
 export const getAllUser = (): User[] => {
@@ -17,15 +16,11 @@ export const deleteUser = (id: string) => {
     users.splice(index, 1);
 }
 
-export const updateUser = (body, index) => {
-    // const index = users.findIndex((user) => user.id === id);
-    // if(index) {
-        users[index] = { ...users[index], ...body };
-        console.log(users[index]);
-    // } 
+export const updateUser = (body: User, index: number) => {
+    users[index] = { ...users[index], ...body };
 }
 
-export const getUser = (id: string): User | string => {
+export const getUser = (id: string): User => {
     const index = users.findIndex((user) => user.id === id);
     if(index) {
         return users[index];
