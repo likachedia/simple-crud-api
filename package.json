@@ -5,8 +5,8 @@
   "main": "./dist/bundle.cjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:dev": "nodemon --esm src/index.ts",
-    "start:prod": "node ./dist/bundle.cjs",
+    "start:dev": "cross-env PORT=4000 nodemon --esm src/index.ts",
+    "start:prod": "webpack && cross-env PORT=4000 node ./dist/bundle.cjs",
     "build": "npx webpack --mode production"
   },
   "repository": {
@@ -28,6 +28,7 @@
     "@types/node": "^20.3.3",
     "@types/uuid": "^9.0.2",
     "@types/webpack-node-externals": "^3.0.0",
+    "cross-env": "^7.0.3",
     "nodemon": "^2.0.22",
     "ts-loader": "^9.4.4",
     "ts-node": "^10.9.1",
