@@ -14,12 +14,12 @@ describe("Server", function () {
     expect(res.body).toEqual([]);
   });
 
-  it("should get /api", async () => {
+  it("should return bad request for none existing rout like /api", async () => {
     const res = await request.get("/api");
     expect(res.status).toBe(404);
   });
 
-  it("should post /api", async () => {
+  it("should add user", async () => {
     const user = {
         "username": "lika",
         "age": 21,
