@@ -38,7 +38,13 @@ server
     });
     if (pathname === "/api/users") {
       if (method === Method.GET) {
-        handleGetUsers(res);
+        try{
+          handleGetUsers(res);
+        }catch{
+          res.statusCode = 500;
+          res.end('Something went wrong');
+        }
+        
       } else if (method === Method.POST) {
         req
           .on("end", async () => {
@@ -46,7 +52,13 @@ server
               badRequest(res);
               return;
             }
-            await addUser(body, res);
+            try{
+              await addUser(body, res);
+            }catch{
+              res.statusCode = 500;
+              res.end('Something went wrong');
+            }
+            
           })
           .on("error", (error) => {
             res.statusCode = 500;
@@ -68,8 +80,13 @@ server
         return;
       }
       if (method === Method.GET) {
-        req.on("end", () => {
-          handleGetUser(id, res);
+        req.on("end", () => {         
+          try{
+            handleGetUser(id, res);
+          }catch{
+            res.statusCode = 500;
+            res.end('Something went wrong');
+          }
         });
       }
       if (method === Method.PUT) {
@@ -79,11 +96,24 @@ server
             badRequest(res, "request is not correct");
             return;
           }
-          await handleUpdateUsers(parsedBody, id, res);
+          try{
+            await handleUpdateUsers(parsedBody, id, res);
+          }catch{
+            res.statusCode = 500;
+            res.end('Something went wrong');
+          }
+          
         });
       }
       if (method === Method.DELETE) {
-        handleDeleteUser(id, res);
+        try{
+          handleDeleteUser(id, res);
+        }catch{
+          res.statusCode = 500;
+          res.end('Something went wrong');
+        }
+        
+        
       }
     } else {
       res.statusCode = 404;
