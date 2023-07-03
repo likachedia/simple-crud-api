@@ -1,6 +1,7 @@
 {
     "compilerOptions": {
       "outDir": "./dist/",
+      "rootDir": "./src",
       "noImplicitAny": false,
     //   "module": "es6",
     //   "target": "es5",
@@ -8,8 +9,11 @@
       "moduleResolution": "node",
       "sourceMap": true,
       "esModuleInterop": true,
-      "target": "es2016",
+      "target": "es6",
       "module": "commonjs",
+    },
+    "ts-node": {
+        "esm": true
     },
     "include": [
         "src",

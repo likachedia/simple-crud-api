@@ -3,10 +3,9 @@
   "version": "1.0.0",
   "description": "simple crud api with node.js",
   "main": "./dist/bundle.cjs",
-"type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:dev": "npx nodemon src/index.ts",
+    "start:dev": "nodemon --esm src/index.ts",
     "start:prod": "node ./dist/bundle.cjs",
     "build": "npx webpack --mode production"
   },
@@ -22,10 +21,12 @@
   "homepage": "https://github.com/likachedia/simple-crud-api#readme",
   "dependencies": {
     "dotenv": "^16.3.1",
+    "uuid": "^9.0.0",
     "webpack-node-externals": "^3.0.0"
   },
   "devDependencies": {
     "@types/node": "^20.3.3",
+    "@types/uuid": "^9.0.2",
     "@types/webpack-node-externals": "^3.0.0",
     "nodemon": "^2.0.22",
     "ts-loader": "^9.4.4",
