@@ -52,7 +52,12 @@ server
               badRequest(res);
               return;
             }
+            const parsedBody: UserForUpdated = JSON.parse(body);
             try{
+              if (!checkResponseBody(parsedBody)) {
+                badRequest(res, "request is not correct");
+                return;
+              }
               await addUser(body, res);
             }catch{
               res.statusCode = 500;
