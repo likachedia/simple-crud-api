@@ -14,7 +14,7 @@ export const addUser = async (user: string, res: Response) => {
         res.end('Something went wrong');
     }
 }
-export const handleDeleteUser = async (id: string, res: Response) => {
+export const handleDeleteUser = (id: string, res: Response) => {
     const users = getAllUser();
     const index = users.findIndex((user) => user.id === id);
     if(index !== -1) {
@@ -35,7 +35,7 @@ export const handleGetUsers = (res: Response) => {
     res.end();
 }
 
-export const handleUpdateUsers = (user, id: string, res: Response) => {
+export const handleUpdateUsers = async (user, id: string, res: Response) => {
     const users = getAllUser();
     const index = users.findIndex((user) => user.id === id);
     if (index !== -1) {
@@ -49,7 +49,7 @@ export const handleUpdateUsers = (user, id: string, res: Response) => {
     }
 }
 
-export const handleGetUser = (id: string, res:Response) => {
+export const handleGetUser = async (id: string, res:Response) => {
     const users = getAllUser();
     const index = users.findIndex((user) => user.id === id);
     if (index !== -1) {

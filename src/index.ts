@@ -31,7 +31,7 @@ server.on('request', (req: http.IncomingMessage, res) => {
 
   res.setHeader('Content-Type', 'application/json');
   let body = '';
-  req.on('data', async (chunk) => {
+  req.on('data', (chunk) => {
     body +=chunk.toString()
   })
   if(pathname === '/api/users') {
@@ -62,22 +62,22 @@ server.on('request', (req: http.IncomingMessage, res) => {
     }
     if(method === Method.GET) {
       req.on('end', () => {
-        handleGetUser(id, res);    
+        handleGetUser(id, res);  
       });
     }
     if(method === Method.PUT) {
-      req.on('end', () => {
+      req.on('end', async() => {
         const parsedBody: UserForUpdated = JSON.parse(body);
         if (!checkResponseBody(parsedBody)) {
           badRequest(res, 'request is not correct');
           return;
         }
-        handleUpdateUsers(parsedBody, id, res);
+        await handleUpdateUsers(parsedBody, id, res);
       });
       
     }
     if(method === Method.DELETE) {
-      handleDeleteUser(id, res);   
+      handleDeleteUser(id, res); 
     }
   } else {
     res.statusCode = 404;
@@ -90,30 +90,3 @@ server.on('request', (req: http.IncomingMessage, res) => {
 server.listen(port, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
 });
-
-
-
-// if (cluster.isPrimary) {
-//   console.log(`Master ${process.pid} is running`);
-//   console.log(numCPUs)
-//   // Fork workers.
-//   for (let i = 0; i < numCPUs; i++) {
-//     // console.log('sd')
-//     cluster.fork({port: (+port)+i});
-//   }
-//   cluster.on('exit', (worker, code, signal) => {
-//     console.log(`worker ${worker.process.pid} died`);
-//   });
-
-// } else {
-//   http.createServer((req, res) => {
-//     res.statusCode = 200;
-//     res.setHeader('Content-Type', 'application/json');
-//   });
-//   server.listen(PORT, () => {
-//       console.log("Error in server setup") 
-//       console.log(`Worker ${process.pid} started`);
-//       console.log(`Server running at http://${hostname}:${port}/`);
-//   });
-
-// }
